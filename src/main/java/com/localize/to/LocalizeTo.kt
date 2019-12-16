@@ -329,3 +329,7 @@ fun String.localize(): String {
 fun String.localize(language: String): String {
     return LocalizeTo.localize(this, language)
 }
+
+fun String.unlocalized(): String {
+    return this
+}

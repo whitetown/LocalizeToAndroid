@@ -77,7 +77,7 @@ With jcenter:
 
 The default language is used if there is no translation for current language.
 i.e.
-let value = "my_key".localized()
+val value = "my_key".localized()
 first will try to find French translation, then English translation
 
 
@@ -85,26 +85,26 @@ first will try to find French translation, then English translation
 
 ```kotlin
     //for current language
-    let value = LocalizeTo.localize("localization_key")
+    val value = LocalizeTo.localize("localization_key")
 
     //for particular language
-    let value = LocalizeTo.localize("localization_key", "de")
+    val value = LocalizeTo.localize("localization_key", "de")
 ```
 
 It's more convenient to use String extensions:
 
 ```kotlin
     //for current language
-    let value = "localization_key".localized()
+    val value = "localization_key".localized()
 
     //for particular language
-    let value = "localization_key".localize("de")
+    val value = "localization_key".localize("de")
 ```
 
 ## Special unlocalized() extension
 
 ```kotlin
-    //let value = "localization_key".unlocalized()
+    val value = "localization_key".unlocalized()
 ```
 
 It does nothing.

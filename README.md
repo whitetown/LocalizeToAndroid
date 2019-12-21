@@ -38,7 +38,7 @@ With jcenter (not yet, in progress):
     }
 
     dependencies {
-        implementation 'com.localize.to:LocalizeTo:0.0.1'
+        implementation 'com.github.whitetown:LocalizeTo:0.0.1'
     }
 
 
@@ -62,6 +62,7 @@ With jcenter (not yet, in progress):
 
 ```kotlin
     LocalizeTo.load(["en", "de", "es", ..., ])
+
 ```
 
 ## Set current and/or default language

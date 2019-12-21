@@ -1,0 +1,5 @@
+<resources>
+    <dimen name="item_height">60dp</dimen>
+    <dimen name="item_margin">8dp</dimen>
+    <dimen name="item_text_size">18sp</dimen>
+</resources>

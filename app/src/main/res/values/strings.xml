@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">LocalizeTo Example</string>
+    <string name="action_latest">Latest</string>
+    <string name="action_v1">V 1.0.0</string>
+    <string name="action_select_lang">Select Language</string>
+</resources>

@@ -1,0 +1,23 @@
+{
+    "_utc_date_time_": "2019-12-15 11:33:58",
+    "_localize_to_": "Thank you for using Localize.to",
+    "all_keys": "Все ключи и переводы для текущего языка",
+    "cancel": "Отмена",
+    "choose_language": "Выберите язык",
+    "clear": "Очистить",
+    "current_language": "Текущий язык",
+    "download_all": "Скачать все доступные языки",
+    "download_pl_de": "Скачать Польский и Немецкий языки",
+    "download_sk": "Скачать Словацкий язык",
+    "download_v1_all": "Скачать версию v1.0.1, все языки",
+    "download_v1_uk": "Скачать версию v1.0.1, Украинский язык",
+    "error": "Ошибка",
+    "fallback_language": "Если нет перевода ",
+    "keys_count": "Количество ключей для текущего языка",
+    "languages_count": "Количество языков",
+    "no": "Нет",
+    "ok": "OK",
+    "select_fallback": "Выберите язык если нет перевода для текущего",
+    "select_language": "Выберите текущий язык",
+    "yes": "Да"
+}

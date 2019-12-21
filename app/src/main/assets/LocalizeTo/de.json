@@ -1,0 +1,23 @@
+{
+    "_utc_date_time_": "2019-12-15 11:33:59",
+    "_localize_to_": "Thank you for using Localize.to",
+    "cancel": "Abbrechen",
+    "choose_language": "Wählen die Sprache",
+    "clear": "Löschen",
+    "current_language": "Aktuelle Sprache",
+    "download_all": "Download alle verfügbare Sprachen",
+    "download_pl_de": "Download polnische und deutsche Sprachen",
+    "download_sk": "Download slowakische Sprache",
+    "download_v1_all": "Download Version 1.0.1, alle Sprachen",
+    "download_v1_uk": "Download Version 1.0.1, ukrainische Sprache",
+    "error": "Fehler",
+    "fallback_language": "Wenn keine Übersetzung ist",
+    "keys_count": "Anzahl der Schlüssel für aktuelle Sprache",
+    "languages_count": "Anzahl der Sprachen",
+    "no": "Nein",
+    "ok": "OK",
+    "select_fallback": "Wählen die Sprache, wenn keine Übersetzung für die aktuelle ist",
+    "select_language": "Wählen aktuelle Sprache",
+    "welcome_dev": "Willkommen",
+    "yes": "Ja"
+}

@@ -1,4 +1,4 @@
-package com.localize.to
+package localizeto
 
 import android.content.res.AssetManager
 import android.os.AsyncTask
@@ -11,24 +11,20 @@ import java.net.URL
 import java.util.*
 import javax.net.ssl.HttpsURLConnection
 
-
 enum class LocalizeToErrorType {
     PARSING_ERROR
 }
 
-
 data class LocalizeToError(val errorType: LocalizeToErrorType) : Error()
-
 
 private sealed class LocalizeToURL
 private data class LocalizeToLanguagesURL(val languages: Array<String>): LocalizeToURL()
 private data class LocalizeToSnapshotURL(val version: String): LocalizeToURL()
 private data class LocalizeToSnapshotLanguagesURL(val version: String, val languages: Array<String>): LocalizeToURL()
 
-
 object LocalizeTo {
     const val localizationFolderName = "LocalizeTo"
-    const val assetsSubDir = "localizeTo"
+    const val assetsSubDir = "LocalizeTo"
 
     internal const val baseURL = "https://localize.to/api/v1"
     internal var apiKey = ""

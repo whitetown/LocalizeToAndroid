@@ -31,21 +31,23 @@ this is enough for the most cases.
 
 ## Installation
 
-With jcenter (not yet, in progress):
+With jcenter:
 
     repositories {
         jcenter()
     }
 
     dependencies {
-        implementation 'com.github.whitetown:LocalizeTo:0.0.1'
+        implementation 'com.github.whitetown:localize-to:*'
+        //    implementation 'com.google.code.gson:gson:2.8.5'
+        //    implementation 'com.github.salomonbrys.kotson:kotson:2.5.0'
     }
 
 
 ## Initialize the module with an API key
 
 ```kotlin
-    import com.localize.to.*
+    import localizeto.*
 
     LocalizeTo.shared.configure(PROJECT_API_KEY)
 
@@ -113,9 +115,9 @@ Use it when you do not know localization keys yet and then you can easily find a
     Get localized strings for particular languages
 
 ```kotlin
-    LocalizeTo.download(["en", "fr", "de", ...]) { (errors) in
+    LocalizeTo.download(arrayOf("en", "fr", "de", ...)) { (errors) in
         if (errors.isNullOrEmpty()) {
-            LocalizeTo.reload(this.languages)
+            LocalizeTo.reload(arrayOf("en", "fr", ...))
         } else {
             Log.e("LocalizeTo", errors.toString())
         }
@@ -147,9 +149,9 @@ Get localized strings for a snapshot (particular languages)
         }
     }
 
-    LocalizeTo.downloadByVersion("v1.0.0", ["en", "de"]) { (errors) in
+    LocalizeTo.downloadByVersion("v1.0.0", arrayOf("en", "de")) { (errors) in
         if (errors.isNullOrEmpty()) {
-            LocalizeTo.reload(["en", "de"], version = "v1.0.0")
+            LocalizeTo.reload(arrayOf("en", "de"), version = "v1.0.0")
         } else {
             Log.e("LocalizeTo", errors.toString())
         }

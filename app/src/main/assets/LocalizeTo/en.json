@@ -1,5 +1,5 @@
 {
-    "_utc_date_time_": "2019-12-15 11:33:57",
+    "_utc_date_time_": "2019-12-24 09:15:28",
     "_localize_to_": "Thank you for using Localize.to",
     "all_keys": "All keys and translations for current language",
     "cancel": "Cancel",
@@ -19,6 +19,7 @@
     "ok": "OK",
     "select_fallback": "Set fallback language",
     "select_language": "Select current language",
+    "special_characters": "Carrier\\nReturn; Line\\rFeed; Tab\\tTab; 'single quote' \"double quote\"",
     "welcome_dev": "Welcome developer",
     "yes": "Yes"
 }

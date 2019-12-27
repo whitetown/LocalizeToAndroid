@@ -55,7 +55,7 @@ With jcenter:
     LocalizeTo.shared.configure(PROJECT_API_KEY,
         "es",           //currentLanguageCode, by default "en"
         "en",           //defaultLanguageCode, could be null, by default "en"
-        "LocalizeTo",   // folder for downloadee translations "LocalizeTo"
+        "LocalizeTo",   //folder to download translations, by default "LocalizeTo"
         assets          //folder with initial translations
         )
 ```

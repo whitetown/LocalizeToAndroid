@@ -18,9 +18,43 @@ enum class LocalizeToErrorType {
 data class LocalizeToError(val errorType: LocalizeToErrorType) : Error()
 
 private sealed class LocalizeToURL
-private data class LocalizeToLanguagesURL(val languages: Array<String>): LocalizeToURL()
+private data class LocalizeToLanguagesURL(val languages: Array<String>): LocalizeToURL() {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as LocalizeToLanguagesURL
+
+        if (!languages.contentEquals(other.languages)) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return languages.contentHashCode()
+    }
+}
+
 private data class LocalizeToSnapshotURL(val version: String): LocalizeToURL()
-private data class LocalizeToSnapshotLanguagesURL(val version: String, val languages: Array<String>): LocalizeToURL()
+private data class LocalizeToSnapshotLanguagesURL(val version: String, val languages: Array<String>): LocalizeToURL() {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as LocalizeToSnapshotLanguagesURL
+
+        if (version != other.version) return false
+        if (!languages.contentEquals(other.languages)) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = version.hashCode()
+        result = 31 * result + languages.contentHashCode()
+        return result
+    }
+}
 
 object LocalizeTo {
     const val localizationFolderName = "LocalizeTo"
@@ -77,9 +111,9 @@ fun LocalizeTo.localize(key: String, language: String): String {
     }
 
     if (language != this.defaultLanguage) {
-        val pairs = this.translations[this.defaultLanguage]
-        if (pairs != null) {
-            val result = pairs[key]
+        val defaultLanguagePairs = this.translations[this.defaultLanguage]
+        if (defaultLanguagePairs != null) {
+            val result = defaultLanguagePairs[key]
             if (result != null) {
                 return result
             }
@@ -214,7 +248,7 @@ fun LocalizeTo.downloadLanguages(languages: Array<String>, completion: (errors: 
         val errors = mutableListOf<Error>()
         this.createOutputFolder()
         for (language in languages) {
-            val pairs = (json as MutableMap<*, *>)[language]
+            val pairs = json[language]
             if (pairs != null) {
                 this.writeTranslation(this.jsonMapper.toJson(pairs), language)
             } else {
@@ -245,11 +279,11 @@ fun LocalizeTo.downloadSnapshot(version: String, languages: Array<String>, compl
         val snapshotLanguages = if (languages.isNotEmpty()) {
             languages
         } else {
-            (json as MutableMap<String, *>).keys.toTypedArray()
+            json.keys.toTypedArray()
         }
 
         for (language in snapshotLanguages) {
-            val pairs = (json as MutableMap<*, *>)[language]
+            val pairs = json[language]
             if (pairs != null) {
                 this.writeTranslation(this.jsonMapper.toJson(pairs), language, version)
             } else {
@@ -282,8 +316,8 @@ private fun LocalizeTo.downloadURL(urlString: LocalizeToURL): URL {
     }
 }
 
-private fun LocalizeTo.apiCall(url: LocalizeToURL, success: (json: Any) -> Unit, failure: (error: Error) -> Unit) {
-    val url = this.downloadURL(url)
+private fun LocalizeTo.apiCall(localizeToUrl: LocalizeToURL, success: (json: MutableMap<String, Any>) -> Unit, failure: (error: Error) -> Unit) {
+    val url = this.downloadURL(localizeToUrl)
     val urlConnection = url.openConnection() as HttpsURLConnection
     try {
         urlConnection.setRequestProperty("Accept-Type", "application/json")
@@ -309,7 +343,7 @@ private fun LocalizeTo.apiCall(url: LocalizeToURL, success: (json: Any) -> Unit,
                     "{}"
                 }
                 urlConnection.disconnect()
-                success(self.jsonMapper.fromJson<MutableMap<*, *>>(result))
+                success(self.jsonMapper.fromJson(result))
             }
         }
         task.execute()

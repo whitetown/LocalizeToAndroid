@@ -71,6 +71,7 @@ object LocalizeTo {
     internal val updatedLanguages: MutableMap<String, MutableSet<String?>> = mutableMapOf()
 
     val translations = mutableMapOf<String, MutableMap<String, String>>()
+    var specialSymbols = true
 }
 
 fun LocalizeTo.configure(
@@ -211,7 +212,11 @@ fun LocalizeTo.loadFromAssets(language: String, version: String? = null): Boolea
     inputStream.close()
 
     return try {
-        this.translations[language] = this.jsonMapper.fromJson(json.toString())
+        var jsonString = json.toString()
+        if (this.specialSymbols) {
+            jsonString = jsonString.replace("\\\\", "\\")
+        }
+        this.translations[language] = this.jsonMapper.fromJson(jsonString)
         true
     } catch (e: Error) {
         false
@@ -231,7 +236,11 @@ fun LocalizeTo.localizationFolder(version: String? = null): File {
 
 fun LocalizeTo.loadFromFile(filename: File, language: String): Boolean {
     return try {
-        this.translations[language] = this.jsonMapper.fromJson(filename.readText())
+        var jsonString = filename.readText()
+        if (this.specialSymbols) {
+            jsonString = jsonString.replace("\\\\", "\\")
+        }
+        this.translations[language] = this.jsonMapper.fromJson(jsonString)
         true
     } catch (e: Error) {
         false
@@ -325,7 +334,7 @@ private fun LocalizeTo.apiCall(localizeToUrl: LocalizeToURL, success: (json: Mut
         val self = this
         val task = object : AsyncTask<Unit, Unit, Unit>() {
             override fun doInBackground(vararg p0: Unit?) {
-                val result = if (urlConnection.responseCode == HttpsURLConnection.HTTP_OK) {
+                var result = if (urlConnection.responseCode == HttpsURLConnection.HTTP_OK) {
                     val ins = BufferedReader(
                         InputStreamReader(
                             urlConnection.inputStream
@@ -343,6 +352,9 @@ private fun LocalizeTo.apiCall(localizeToUrl: LocalizeToURL, success: (json: Mut
                     "{}"
                 }
                 urlConnection.disconnect()
+                if (specialSymbols) {
+                    result = result.replace("\\\\", "\\")
+                }
                 success(self.jsonMapper.fromJson(result))
             }
         }
